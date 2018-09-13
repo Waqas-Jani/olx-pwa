@@ -3,10 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-//const flash = require('connect-flash');
+
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-//const passport = require('passport');
+
 const session = require('express-session');
 const app = express();
 const config = require('./config/database');
@@ -50,9 +50,6 @@ app.use(session({
   resave: true
 }));
 
-// Passport init
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 // Express Validator
 app.use(expressValidator({
@@ -71,18 +68,6 @@ app.use(expressValidator({
     };
   }
 }));
-
-// // Connect Flash
-// app.use(flash());
-
-// // Global Vars
-// app.use(function (req, res, next) {
-//   res.locals.success_msg = req.flash('success_msg');
-//   res.locals.error_msg = req.flash('error_msg');
-//   res.locals.error = req.flash('error');
-//   res.locals.user = req.user || null;
-//   next();
-// });
 
 
 
