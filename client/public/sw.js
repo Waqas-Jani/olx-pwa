@@ -1,44 +1,71 @@
+var cacheName = 'pwa-cashe_01';
+var dynamiccashe = 'dynamic-cashes';
+var filesToCache = [
+  '/',
+  'favicon.ico',
+  './index.html',
+  './static/js/bundle.js',
+  './static/media/olx-logo.png',
+  'https://use.fontawesome.com/releases/v5.2.0/css/all.css',
+  'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+  'https://code.jquery.com/jquery-3.3.1.js'
+
+];
+
+self.addEventListener('install', function (e) {
+  self.skipWaiting();
+  console.log('[ServiceWorker] Install');
+  e.waitUntil(
+    caches.open(cacheName).then(function (cache) {
+      console.log('[ServiceWorker] Caching app shell');
+      return cache.addAll(filesToCache);
+    })
+  );
+});
+
+self.addEventListener('activate', function (e) {
+  console.log('Services Worker Activated');
+  e.waitUntil(
+    caches.keys().then(function (keyList) {
+      return Promise.all(keyList.map(function (key) {
+        if (key !== cacheName) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  return self.clients.claim();
+});
+
+self.addEventListener('fetch', function (e) {
+  console.log('Fetch Services', e.request.url);
+  const req = e.request;
+  const url = new URL(req.url);
+
+  if (url.origin === location.origin) {
+    e.respondWith(
+      caches.match(req).then(function (response) {
+        return response || fetch(req);
+      })
+    );
+  } else {
+    e.respondWith(firstCheckNetwork(e.request));
+  }
+
+});
+
+async function firstCheckNetwork(req) {
+  const cache = await caches.open(dynamiccashe);
+  try {
+
+    const result = await fetch(req);
+    cache.put(req, result.clone());
+    return result;
+  } catch (error) {
+    return await caches.match(req);
+
+  }
+}
 
 
-(global => {
-  'use strict';
-  importScripts('/node_modules/sw-toolbox/sw-toolbox.js')
-  // Load the sw-toolbox library.
-  // importScripts('/sw-toolbox.js');
-
-  // Turn on debug logging, visible in the Developer Tools' console.
-  global.toolbox.options.debug = true;
-
-  // Set up a handler for HTTP GET requests:
-  // - /\.ytimg\.com\// will match any requests whose URL contains 'ytimg.com'.
-  //   A narrower RegExp could be used, but just checking for ytimg.com anywhere
-  //   in the URL should be fine for this sample.
-  // - toolbox.cacheFirst let us to use the predefined cache strategy for those
-  //   requests.
-
-  global.toolbox.router.get('http://localhost:3000/', global.toolbox.cacheFirst, {
-    // Use a dedicated cache for the responses, separate from the default cache.
-    cache: {
-      name: 'olx',
-      // Store up to 10 entries in that cache.
-      maxEntries: 30,
-      // Expire any entries that are older than 30 seconds.
-      maxAgeSeconds: 60 * 60 * 24 * 365
-    }
-  });
-
-  global.toolbox.precache(['/', '/index.html',
-    '/static/js/bundle.js'
-  ]);
-  // By default, all requests that don't match our custom handler will use the
-  // toolbox.networkFirst cache strategy, and their responses will be stored in
-  // the default cache.
-  global.toolbox.router.default = global.toolbox.networkFirst;
-
-  // Boilerplate to ensure our service worker takes control of the page as soon
-  // as possible.
-  global.addEventListener('install',
-    event => event.waitUntil(global.skipWaiting()));
-  global.addEventListener('activate',
-    event => event.waitUntil(global.clients.claim()));
-})(self);
