@@ -1,0 +1,89 @@
+#product-detail {
+    border: 1px solid gray;
+}
+
+#product {
+    width: 80%;
+    margin: 20px auto;
+}
+
+#price-btn {
+    width: 240px;
+    height: 80px;
+    border: 1px solid orange;
+    background: orange;
+    color: #FFF;
+    border-radius: 50px/20px;
+    font-weight: bold;
+    font-size: 20px;
+    outline: none;
+}
+
+#price-btn:active {
+    background: darkorange;
+}
+
+#seller {
+    margin-top: 10px;
+    background: lightblue;
+    padding: 10px;
+}
+
+#message {
+    margin-top: 10px;
+    background: lightblue;
+    padding: 10px;
+}
+
+#msg-btn {
+    width: 95%;
+    height: 50px;
+    background: #777;
+    color: #FFF;
+    border: 1px solid #777;
+    font-weight: bold;
+}
+
+#view-btn {
+    width: 95%;
+    height: 50px;
+    margin-top: 5px;
+    background: #777;
+    color: #FFF;
+    border: 1px solid #777;
+    font-weight: bold;
+}
+
+#msg-btn:active , #view-btn:active {
+    background: #888;
+}
+
+#tips {
+    padding: 5px;
+    margin-top: 10px;
+    background: lightblue;
+}
+
+#tips ol li {
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 770px) {
+    #price-btn {
+        margin-top: 10px;
+        width: 100%;
+        
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    img {
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    #price-btn {
+        height: 50px;
+    }
+}

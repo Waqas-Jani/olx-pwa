@@ -1,0 +1,114 @@
+#footer {
+    background-image: url('https://olxpkstatic-a.akamaihd.net/22450d5-985/packed/img/2f5a55d0886ecadd34c360ff1ff11fc9e6.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    border-top: 1px solid gray;
+    padding: 20px;
+}
+
+#footer-detail {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: 10px auto;
+}
+#fterm {
+    margin-left: 10px;
+
+}
+#fterm ul li {
+    list-style: none;
+}
+#fterm ul a {
+    text-decoration: none;
+}
+#flink ul li {
+    list-style: none;
+}
+#flink ul a {
+    text-decoration: none;
+}
+/* Home Styling */
+
+#form-bg {
+    height: auto;
+    background-image: url('https://www.print-services.com/files/products_images/10000013969/10000013969.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding:15px;
+}
+
+#form-overlay {
+    height: 70px;
+    max-width: 1000px;
+    background-color: #999;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+#ads, #location{
+    padding-left: 40px;
+}
+
+#iconform, {
+    position: relative;
+}
+
+#iconform i, {
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    padding: 9px;
+    font-size: 22px;
+    color: lightgray;
+}
+
+#iconform i{
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    padding: 9px;
+    font-size: 22px;
+    color: lightgray;
+}
+
+#cate-item {
+    width: 95px;
+    height: 130px;
+    float: left;
+    margin:5px;
+}
+#cate-item:hover 
+{
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+#cate-item img {
+    margin: 5px;
+    margin-left: 20px;
+}
+
+#cate-item p {
+    font-size: 13px;
+    text-align: center;
+}
+
+
+
+/* Validation */
+.form-error {
+    color:red;
+}
+
+@media only screen and (max-width: 769px) {
+    #main-content {
+        margin-top: 20px;
+    }
+   
+
+}

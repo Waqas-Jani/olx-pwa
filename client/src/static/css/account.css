@@ -1,0 +1,363 @@
+#tabcard {
+    margin-bottom: 10px;
+}
+
+#bar {
+    background: lightgray;
+    padding: 5px;
+}
+
+#bar p {
+    font-weight: bold;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+#mylist {
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    width: 80%;
+    position: relative;
+    margin: 20px auto;
+    background-color: #FFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 1px lightblue;
+}
+
+#myitem-img {
+    height: 120px;
+    overflow: hidden;
+    width: 150px;
+    border-radius: 5px;
+}
+
+#myitem-img img {
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    border-radius: 5px;
+}
+
+#mylist:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#mylist:hover {
+    box-shadow: 0px 0px 2px 2px #777;
+}
+
+#myitem-detail {
+    margin-left: 10px;
+    padding: 10px;
+    margin-top: 7px;
+}
+
+#myproduct-name {
+    width: 100%;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 5px;
+}
+
+#myproduct-cate {
+    font-size: 12px;
+    color: gray;
+    font-weight: bold;
+    line-height: 3px;
+}
+
+#myproduct-price {
+    font-size: 17px;
+    color: orange;
+    line-height: 10px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+#mybtn {
+    position: absolute;
+    float: right;
+    z-index: 10;
+    right: 20px;
+    margin-top: 30px;
+}
+
+#mybtn button {
+    margin: 10px;
+}
+
+/* Media queris for myad Component as well as view later  */
+
+@media only screen and (max-width: 991px) {
+    #myproduct-name {
+        font-size: 18px;
+        line-height: 19px;
+    }
+    #myproduct-cate {
+        line-height: 3px;
+        margin-top: -8px;
+    }
+    #myproduct-price {
+        line-height: 5px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #mylist {
+        display: block;
+        height: 370px;
+        width: 80%;
+        margin: 20px auto;
+        background-color: #FFF;
+        border-radius: 5px;
+        box-shadow: 0px 0px 2px 1px lightblue;
+    }
+    #mybtn {
+        position: relative;
+        margin-top: -70px;
+    }
+    #mybtn button {
+        margin: 5px;
+    }
+    #myitem-img {
+        display: block;
+        height: 250px;
+        overflow: hidden;
+        width: 100%;
+        border-radius: 5px;
+    }
+    #myitem-img img {
+        width: 100%;
+        height: auto;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 5px;
+    }
+    #myproduct-name {
+        font-size: 15px;
+        line-height: 17px;
+    }
+    #myproduct-cate {
+        line-height: 3px;
+        margin-top: -8px;
+    }
+    #myproduct-price {
+        line-height: 5px;
+    }
+}
+
+/* /////////// Only image */
+
+@media only screen and (max-width: 567px) {
+
+    #mybtn {
+        position: relative;
+        margin-top: -10px;
+    }
+ 
+    #myitem-img {
+        display: block;
+        height: 200px;
+        overflow: hidden;
+        width: 100%;
+        border-radius: 5px;
+    }
+    #myitem-img img {
+        width: 100%;
+        height: auto;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        border-radius: 5px;
+    }
+    #myproduct-name {
+        font-size: 13px;
+        line-height: 15px;
+    }
+}
+
+/* //////////////////////////// */
+
+@media only screen and (max-width: 450px) {
+    #myproduct-name {
+        width: auto;
+    }
+    #myproduct-name, #myproduct-price {
+        font-size: 16px;
+    }
+    #bar p {
+        font-weight: bold;
+        padding-left: 10px;
+        font-size: 15px;
+    }
+}
+
+/* Setting component Styling */
+
+#profile {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+#dp {
+    margin-left: 10px;
+}
+
+#info {
+    padding-top: 15px;
+    margin-left: 10px;
+}
+
+#probtn {
+    margin-top: 30px;
+}
+
+#probtn button {
+    margin-left: 5px;
+}
+
+/* Media queris for Profile  */
+
+@media only screen and (max-width: 769px) {
+    #profiledb {
+        height: 150px;
+        width: 150px;
+    }
+    #info h2 {
+        font-size: 23px;
+    }
+    #info h5 {
+        font-size: 19px;
+    }
+    #probtn button {
+        width: 120px;
+    }
+    #delete {
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    #profiledb {
+        height: 110px;
+        width: 110px;
+    }
+    #info h2 {
+        font-size: 19px;
+    }
+    #info h5 {
+        font-size: 16px;
+    }
+    #probtn button {
+        font-size: 12px;
+        width: 90px;
+    }
+    #delete {
+        padding: 5px;
+    }
+    #probtn {
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 419px) {
+    #profiledb {
+        height: 100px;
+        width: 100px;
+    }
+    #info h2 {
+        font-size: 16px;
+    }
+    #info h5 {
+        font-size: 14px;
+    }
+    #probtn button {
+        font-size: 10px;
+        width: 75px;
+    }
+    #delete {
+        padding: 2px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    #profiledb {
+        height: 90px;
+        width: 90px;
+    }
+    #info h2 {
+        font-size: 15px;
+    }
+    #info h5 {
+        font-size: 13px;
+    }
+    #probtn button {
+        font-size: 10px;
+        width: 70px;
+    }
+    #edit {
+        padding: 5px;
+    }
+    #delete {
+        padding: 1px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+@media only screen and (max-width: 357px) {
+    #profile {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+    }
+    #profiledb {
+        height: 125px;
+        width: 125px;
+        margin-left: 35px;
+    }
+    #info h2 {
+        font-size: 15px;
+        text-align: center;
+    }
+    #info h5 {
+        font-size: 13px;
+        text-align: center;
+    }
+    #probtn {
+        margin-left: 10px;
+    }
+    #probtn button {
+        font-size: 11px;
+        width: 80px;
+    }
+    #edit {
+        padding: 5px;
+    }
+    #delete {
+        padding: 1px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+@media only screen and (max-width: 317px) {
+    #probtn button {
+        font-size: 10px;
+        width: 75px;
+    }
+}
+/*  */
+
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
