@@ -2,10 +2,8 @@ var cacheName = 'pwa-cashe_01';
 var dynamiccashe = 'dynamic-cashes';
 var filesToCache = [
   '/',
-  'favicon.ico',
   './index.html',
   './static/js/bundle.js',
-  './static/media/olx-logo.png',
   'https://use.fontawesome.com/releases/v5.2.0/css/all.css',
   'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
   'https://code.jquery.com/jquery-3.3.1.js'
