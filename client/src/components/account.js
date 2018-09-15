@@ -6,7 +6,7 @@ import Profile from './layouts/profile';
 //import axios from 'axios';
 import Viewlater from './layouts/viewlater';
 import '../static/css/account.css';
-import Message from './layouts/message';
+
 
 
 class Account extends React.Component {
@@ -34,9 +34,7 @@ class Account extends React.Component {
                         <li className="nav-item">
                             <a className="nav-link active" data-toggle="tab" href="#panel1" role="tab">Ads</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="tab" href="#panel2" role="tab">Messages</a>
-                        </li>
+                   
                         <li className="nav-item">
                             <a className="nav-link" data-toggle="tab" href="#panel3" role="tab">Profile</a>
                         </li>
@@ -47,11 +45,6 @@ class Account extends React.Component {
                     <div className="tab-content card" id="tabcard">
                         <div className="tab-pane fade in show active" id="panel1" role="tabpanel">
                             <MyAds />
-                        </div>
-
-                        <div className="tab-pane fade" id="panel2" role="tabpanel">
-                            <br />
-                            <Message />
                         </div>
 
                         <div className="tab-pane fade" id="panel3" role="tabpanel">

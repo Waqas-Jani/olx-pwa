@@ -2,20 +2,22 @@ import React from 'react';
 import '../../static/css/account.css';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-
+import Messages from './showMessage.js'
 const _userId = JSON.parse(localStorage.getItem('UserObject'));
 
 class MyAds extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            showMessages:false,
+            postID:''
         };
         //this.deleteAd = this.deleteAd.bind(this);
     }
 
     componentDidMount() {
-       
+
         let path = !_userId ? '' : _userId._id;
         //  console.log(this.props);
         axios.get('http://localhost:5000/user/ads/' + path)
@@ -31,13 +33,16 @@ class MyAds extends React.Component {
         axios.delete('http://localhost:5000/item/delete/' + id)
             .then(res => {
                 //console.log(res.data);
-                
+
                 window.location = '/myaccount'
             }).catch(err => {
                 console.error(err);
             })
     }
+    showMessageToggle = (data) => {
+        this.setState({ showMessages: !this.state.showMessages, postID: data })
 
+    }
 
     render() {
         return (
@@ -47,14 +52,15 @@ class MyAds extends React.Component {
                 </div>
 
                 {
-                    this.state.data.length === 0 ? <NoAds /> : <ListItem data={this.state.data}
+                    this.state.data.length === 0 ? <NoAds /> : <ListItem clickBtn={this.showMessageToggle} data={this.state.data}
                         deleteAd={this.deleteAd}
                     />
                 }
 
 
 
-                
+                {this.state.showMessages ? <Messages postID={this.state.postID} click={this.showMessageToggle} /> : null}
+
 
             </div>
 
@@ -81,9 +87,11 @@ const ListItem = (props) => {
                                 <p id="myproduct-cate">{item.category}</p>
                                 <p id="myproduct-price"><span>Rs.</span>{item.price}</p>
 
-
+                                <button type="button" className="btn btn-primary" onClick={()=>props.clickBtn(item._id)} >  View Message</button>
+                                <p></p>
                             </div>
                             <div id="mybtn">
+
                                 <NavLink to={`/myaccount/myad/${item._id}`}><button type="button" className="btn btn-primary">View</button></NavLink>
                                 <NavLink to={`/myaccount/ad/update/${item._id}`}><button type="button" className="btn btn-warning">Edit</button></NavLink>
                                 <button type="button" className="btn btn-danger"
@@ -133,5 +141,9 @@ const NoAds = () => {
     );
 
 }
+
+
+
+
 
 export default MyAds;

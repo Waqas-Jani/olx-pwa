@@ -278,4 +278,31 @@ router.post('/message', function (req, res) {
 
 
 });
+
+// Show messages
+router.get('/showMessage', function (req, res) {
+    console.log("post id", req.query.postID)
+    MessageModel.find({ postID: req.query.postID }, function (err, record) {
+        if (err) {
+            console.log(err)
+            res.send(err)
+        }
+        else {
+            console.log(record)
+            res.send(record)
+        }
+    })
+})
+// Delete message
+router.delete('/deleteMessage/:id', function (req, res) {
+    console.log("postId" + req.params.id)
+    MessageModel.deleteOne({ _id: req.params.id }, function (err, record) {
+        if (err) {
+            res.send(err)
+        }
+        else {
+            res.send(record)
+        }
+    })
+})
 module.exports = router;
