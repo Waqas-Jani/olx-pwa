@@ -274,7 +274,7 @@ router.delete('/delete/account/:id', function (req, res) {
             // res.status(500).json(err)
             console.log(err);
         } else {
-            // post ids ka array bnao
+            // get post ids ka array and store into array
             //console.log(userpost);
             var postid = [];
 
@@ -283,7 +283,7 @@ router.delete('/delete/account/:id', function (req, res) {
                 postid.push(userpost[x]._id);
             }
             console.log(postid);
-            // wherein lga k viewlater ma sy del kro
+            // where in  delete viewlater 
             ViewLater.deleteMany({ _postId: { $in: postid } }).then().catch(err => res.status(500).json({
                 err
             }));
