@@ -3,7 +3,6 @@ import React from 'react'
 import axios from 'axios'
 class Messages extends React.Component {
     state = {
-        userID: this.props.userID,
         postID: this.props.postID,
         name: '',
         contact: '',
@@ -43,7 +42,7 @@ class Messages extends React.Component {
     render() {
         return (
             <div className="popup" >
-                <div className="inner-popup-message">
+                <div className="inner-popup">
                     <div className="p-3">
                         <button className="btn btn-primary my-3" onClick={this.props.click} >close</button>
                         {this.state.messageData.length > 0 ? this.state.messageData.map((data, index) => {
