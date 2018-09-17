@@ -22,6 +22,8 @@ db.on('error', function (err) {
   console.log(err);
 });
 
+
+
 // Cors middleware
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,6 +31,8 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+
 
 // // View Engine
 // app.set('views', path.join(__dirname, 'views'));
@@ -68,8 +72,6 @@ app.use(expressValidator({
     };
   }
 }));
-
-
 
 // Route file 
 

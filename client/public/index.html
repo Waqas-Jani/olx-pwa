@@ -14,6 +14,8 @@
     -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <link href="pnotify.css" media="all" rel="stylesheet" type="text/css" />
+
 
   <!-- BootStrap CSS  Link -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -69,6 +71,31 @@
   crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
   crossorigin="anonymous"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script type="text/javascript" src="pnotify.js"></script>
+<script>
+  const _userId = JSON.parse(localStorage.getItem('UserObject'));
 
+  console.error("This is ID" + _userId._id);
+
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('bde48f4ae0e395af0877', {
+    cluster: 'ap2',
+    forceTLS: true
+  });
+
+  var channel = pusher.subscribe('message');
+  channel.bind(_userId._id, function (data) {
+
+    $(function () {
+      new PNotify({
+        title: 'Message',
+        text: data.message
+      });
+    });
+  });
+</script>
 
 </html>

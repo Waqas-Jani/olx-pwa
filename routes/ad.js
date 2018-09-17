@@ -3,6 +3,18 @@ const router = express.Router();
 const fs = require('fs-extra');
 const formidable = require('formidable');
 
+// Pusher 
+
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+  appId: '601330',
+  key: 'bde48f4ae0e395af0877',
+  secret: 'b3199a63ef217d4fe27f',
+  cluster: 'ap2',
+  encrypted: true
+});
+
 
 
 
@@ -245,12 +257,15 @@ router.get('/total/ads', function (req, res) {
 
 // Store the message to table
 router.post('/message', function (req, res) {
+
+
     console.log("messages", req.body.msg);
     const mname = req.body.msg.name;
     const mphone = req.body.msg.phone;
     const mmessage = req.body.msg.message;
     const muserid = req.body.msg.userID;
     const mpostid = req.body.msg.postID;
+    const postedUserId= req.body.msg.postedUserId;
     //console.log(name);
     let mssg = new MessageModel({
         name: mname,
@@ -267,6 +282,9 @@ router.post('/message', function (req, res) {
             res.json(err);
 
         } else {
+            pusher.trigger('message', postedUserId, {
+                "message": "You have new message"
+              });
             console.log(record);
 
             res.json({

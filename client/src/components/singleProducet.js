@@ -72,12 +72,15 @@ class SingleProduct extends React.Component {
     sendMessage = (event) => {
       //  event.prventDefault();
        // alert('hello');
+       const _postedUserId = this.state.data !== undefined && this.state.data[0]._userId
+       
         var msg = {
             name: this.state.mname,
             phone: this.state.mphone,
             message: this.state.message,
             userID:userId,
-            postID : this.props.match.params.id 
+            postID : this.props.match.params.id ,
+            postedUserId:_postedUserId
         }
         console.log(msg)
         axios.post('http://localhost:5000/item/message', {msg}).then(res => {
@@ -94,8 +97,8 @@ class SingleProduct extends React.Component {
     }
     // Render Function
     render() {
-        const { data } = this.state;
-        const _userId = data !== undefined && data[0]._userId;
+       const {data} = this.state;
+        
         return (
             <div>
                 <div className="container">
@@ -201,8 +204,7 @@ class SingleProduct extends React.Component {
                                 </div>
 
                             }
-                            {console.log(userId)}
-                            {console.log("This is postId" + _userId)}
+                       
 
                             <div id="tips">
                                 <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Safety Tips for Buyers</p>
