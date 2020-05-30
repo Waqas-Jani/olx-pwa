@@ -6,8 +6,6 @@ import axios from 'axios';
 import NotificationSystem from 'react-notification-system';
 
 var time = new Date();
-console.log(time);
-
 const _userId = JSON.parse(localStorage.getItem('UserObject'));
 var userId = !_userId ? '' : _userId._id;
 class SingleProduct extends React.Component {
@@ -18,9 +16,7 @@ class SingleProduct extends React.Component {
             mname: '',
             mphone: '',
             message: ''
-
         };
-
     }
 
     _notificationSystem = null;
@@ -32,11 +28,8 @@ class SingleProduct extends React.Component {
         });
     }
     componentDidMount() {
-
         this._notificationSystem = this.refs.notificationSystem;
         let path = this.props.match.params.id;
-        //console.log(path)
-        //console.log(this.props.match.params.id);
         axios.get('http://localhost:5000/item/item/?id=' + path)
             .then((res) => {
                 this.setState({ data: res.data });
@@ -45,60 +38,63 @@ class SingleProduct extends React.Component {
     }
     // ViewLater ads function
     viewLater = () => {
-
-        // console.log("User ID:" + userId);
         let data = this.state.data;
-        if (data === undefined) {
-            alert("Ads is not load")
+        if (!userId == '') {
+            if (data === undefined) {
+                alert("Ads is not load")
+            } else {
+                let _postId = data[0]._id;
+                axios.post('http://localhost:5000/user/viewlater', { userId, _postId }).then(res => {
+                    this._addNotification("success", "Added to View later.");
+                }).catch(err => {
+                    let error = err.response.data.errors[0];
+                    this._addNotification("error", `${error.param}: ${error.msg}`)
+                })
+
+            }
         } else {
-            let _postId = data[0]._id;
-            //alert(data[0]._id);
-            axios.post('http://localhost:5000/user/viewlater', { userId, _postId }).then(res => {
-
-                this._addNotification("success", "Added to View later.");
-            }).catch(err => {
-                //console.log(err.response);
-                let error = err.response.data.errors[0];
-
-                this._addNotification("error", `${error.param}: ${error.msg}`)
-            })
-
+            this._addNotification("error", "First Login!");
         }
     }
-
-
     // Send message to seller
-
     sendMessage = (event) => {
-      //  event.prventDefault();
-       // alert('hello');
-       const _postedUserId = this.state.data !== undefined && this.state.data[0]._userId
-       
-        var msg = {
-            name: this.state.mname,
-            phone: this.state.mphone,
-            message: this.state.message,
-            userID:userId,
-            postID : this.props.match.params.id ,
-            postedUserId:_postedUserId
+        const { mname, message, mphone } = this.state;
+        const _postedUserId = this.state.data !== undefined && this.state.data[0]._userId
+        if (!userId == '') {
+            if (mname !== '' && mphone !== '' && message !== '') {
+                var msg = {
+                    name: mname,
+                    phone: mphone,
+                    message: message,
+                    userID: userId,
+                    postID: this.props.match.params.id,
+                    postedUserId: _postedUserId
+                }
+                axios.post('http://localhost:5000/item/message', { msg }).then(res => {
+                    this._addNotification("success", "Message send Successfully.");
+                    // window.location=`/item/${this.props.match.params.id}`
+                    this.setState({
+                        mname: "",
+                        mphone: "",
+                        message: "",
+                    })
+                }).catch(err => {
+                    console.log("ERR", err.response);
+
+                })
+            } else {
+                this._addNotification("error", "All fields required!");
+            }
+        } else {
+            this._addNotification("error", "First Login!");
         }
-        console.log(msg)
-        axios.post('http://localhost:5000/item/message', {msg}).then(res => {
-            console.log(res.data);
-
-            this._addNotification("success", "Message send Successfully.");
-            window.location=`/item/${this.props.match.params.id}`
-        }).catch(err => {
-            console.log(err.response);
-
-        })
 
 
     }
     // Render Function
     render() {
-       const {data} = this.state;
-        
+        const { data } = this.state;
+
         return (
             <div>
                 <div className="container">
@@ -176,18 +172,21 @@ class SingleProduct extends React.Component {
                                                         <div className="form-group">
                                                             <label htmlFor="recipient-name" className="col-form-label">Name</label>
                                                             <input type="text" required
+                                                                value={this.state.mname}
                                                                 onChange={(e) => this.setState({ mname: e.target.value })}
                                                                 className="form-control" id="mname" name="mname" />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="recipient-name" className="col-form-label">Phone#</label>
-                                                            <input type="text" required
+                                                            <input type="number" required
+                                                                value={this.state.mphone}
                                                                 onChange={(e) => this.setState({ mphone: e.target.value })}
                                                                 className="form-control" id="mphone" name="mphone" />
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="message-text" className="col-form-label">Message:</label>
                                                             <textarea className="form-control" required
+                                                                value={this.state.message}
                                                                 onChange={(e) => this.setState({ message: e.target.value })}
                                                                 id="mmessage" name="message" ></textarea>
                                                         </div>
@@ -204,7 +203,6 @@ class SingleProduct extends React.Component {
                                 </div>
 
                             }
-                       
 
                             <div id="tips">
                                 <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Safety Tips for Buyers</p>
@@ -213,13 +211,9 @@ class SingleProduct extends React.Component {
                                     <li>Check the item before you buy</li>
                                     <li>Pay only after collecting item</li>
                                 </ol>
-
                             </div>
-
-
                         </div>
                     </div>
-
                 </div>
                 <Footer />
                 <NotificationSystem ref="notificationSystem" />

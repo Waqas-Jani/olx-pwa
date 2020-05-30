@@ -9,9 +9,8 @@ class Footer extends React.Component {
     render() {
         return (
             <div id="footer">
-
                 <div id="footer-detail">
-                    <img src={logo} alt="Logo" id="flogo" style={{maxWidth:'60px', maxHeight:'60px'}} />
+                    <img src={logo} alt="Logo" id="flogo" style={{ maxWidth: '60px', maxHeight: '60px' }} />
                     <div id="fterm">
                         <ul>
                             <a href="#"><li>Location</li></a>
@@ -27,13 +26,8 @@ class Footer extends React.Component {
                         </ul>
                     </div>
                 </div>
-
-
             </div>
-
-
         );
     }
 }
-
 export default Footer;

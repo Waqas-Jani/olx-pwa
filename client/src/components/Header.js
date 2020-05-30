@@ -6,14 +6,11 @@ import { NavLink } from 'react-router-dom';
 const currentUser = JSON.parse(localStorage.getItem('UserObject'));
 
 class Header extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
             userid: currentUser == undefined ? 'My Account' : currentUser.email
-
         };
-        //console.log(this.props);
     }
     render() {
         return (
@@ -55,21 +52,12 @@ class Header extends React.Component {
                             )
                         }
 
-
-
                         <div>
-
                             <NavLink to={!currentUser ? '/user/login' : '/posting'}><button type="button" id="ad-btn" className="btn btn-outline-warning btn-lg resbtn3" >Submit an Ad</button></NavLink>
-
                         </div>
                     </div>
-
-
-
-
                 </div>
             </div>
-
         );
     }
 }

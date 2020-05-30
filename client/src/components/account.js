@@ -3,28 +3,14 @@ import Header from './Header';
 import Footer from './footer';
 import MyAds from './layouts/myads';
 import Profile from './layouts/profile';
-//import axios from 'axios';
 import Viewlater from './layouts/viewlater';
 import '../static/css/account.css';
-
-
 
 class Account extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
-    // componentDidMount() {
-    //     const _userdata = JSON.parse(localStorage.getItem('UserObject'));
-    //     let id = _userdata._id;
-    //     console.log("My Account" + id);
-    //     axios.get('http://localhost:5000/user/update/object/' + id).then(res => {
-    //         console.log("The user data" + res.data);
-    //         localStorage.setItem("UserObject", JSON.stringify(res.data));
-    //     }).catch(err => console.log(err));
-
-
-    // }
     render() {
         return (
             <div>

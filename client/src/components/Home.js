@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-//import {connect} from 'react-redux'
-//import {changeState} from '../store/actions/action';
 import '../static/css/app.css';
 import Header from './Header';
 import Footer from './footer';
@@ -90,39 +88,13 @@ class Home extends React.Component {
 
                                     })
                                 }
-
-
-                            </div>
-
+                           </div>
                         </div>
-
-
-
-
-
                     </div>
-
-
-
                 </div>
                 <Footer />
             </div>
         );
     }
 }
-// function mapStateToProps(state) {
-//     return({
-//         userName: state.RootReducer.userName
-//     })
-// }
-
-// function mapDispatchToProps(dispatch){
-//     return({
-//         changestateToReducer : (updatevalue)=> {
-//             dispatch(changeState(updatevalue))
-//         }
-
-//     })
-// }
-//export default connect(mapStateToProps,mapDispatchToProps)(Home);
 export default Home;

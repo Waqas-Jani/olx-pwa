@@ -5,10 +5,6 @@ import '../static/css/singleproduct.css';
 import axios from 'axios';
 
 var time = new Date();
-console.log(time);
-
-
-
 class OwnadView extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +14,6 @@ class OwnadView extends React.Component {
         };
 
     }
-
     componentDidMount() {
         let path = this.props.match.params.id;
         //console.log(path)
