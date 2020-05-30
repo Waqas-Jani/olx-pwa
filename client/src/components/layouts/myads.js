@@ -10,30 +10,23 @@ class MyAds extends React.Component {
         super(props);
         this.state = {
             data: [],
-            showMessages:false,
-            postID:''
+            showMessages: false,
+            postID: ''
         };
-        //this.deleteAd = this.deleteAd.bind(this);
     }
 
     componentDidMount() {
-
-        let path = !_userId ? '' : _userId._id;
-        //  console.log(this.props);
+        let path = !_userId ? '' : _userId._id
         axios.get('http://localhost:5000/user/ads/' + path)
             .then((res) => {
                 this.setState({ data: res.data });
-                //console.log(res.data);
             }).catch(err => console.error(err))
 
     }
     // Delete user his own posted ad .. request.
     deleteAd(id) {
-        // console.log(id);
         axios.delete('http://localhost:5000/item/delete/' + id)
             .then(res => {
-                //console.log(res.data);
-
                 window.location = '/myaccount'
             }).catch(err => {
                 console.error(err);
@@ -87,7 +80,7 @@ const ListItem = (props) => {
                                 <p id="myproduct-cate">{item.category}</p>
                                 <p id="myproduct-price"><span>Rs.</span>{item.price}</p>
 
-                                <button type="button" className="btn btn-primary" onClick={()=>props.clickBtn(item._id)} >  View Message</button>
+                                <button type="button" className="btn btn-primary" onClick={() => props.clickBtn(item._id)} >  View Message</button>
                                 <p></p>
                             </div>
                             <div id="mybtn">

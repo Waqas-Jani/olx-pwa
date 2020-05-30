@@ -20,7 +20,6 @@ class Profile extends React.Component {
     }
     deleteAccount = (id) => {
         axios.delete('http://localhost:5000/user/delete/account/'+ id).then(res => {
-            console.log("User Deleted")
             localStorage.removeItem('UserObject');
             window.location= '/'
         }).catch(err => console.log(err));

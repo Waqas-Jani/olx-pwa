@@ -74,11 +74,7 @@ class SubmitAdd extends React.Component {
         var form = document.getElementById('addform')
         var formData = new FormData(form);
         if (this.props.match.path === '/posting') {
-
-
             axios.post('http://localhost:5000/item/ads', formData).then(res => {
-                console.log(res.data);
-
                 this._addNotification("success", "Your ad successfully upload.");
                 window.location = '/';
             })
@@ -89,13 +85,10 @@ class SubmitAdd extends React.Component {
         } else {
             let path = this.props.match.params.id;
             axios.put('http://localhost:5000/item/ads/update/?id=' + path, formData).then(res => {
-                console.log(res.data);
-
                 this._addNotification("success", "Your ad successfully updated.");
                 window.location = '/';
             })
                 .catch(err => {
-                    console.log(err.response);
                     this._addNotification("error", "You have an error in your form please check and resubmit again.")
                 });
 

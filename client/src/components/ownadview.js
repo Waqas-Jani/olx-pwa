@@ -16,12 +16,9 @@ class OwnadView extends React.Component {
     }
     componentDidMount() {
         let path = this.props.match.params.id;
-        //console.log(path)
-        console.log(this.props.match.params.id);
         axios.get('http://localhost:5000/item/item/?id=' + path)
             .then((res) => {
                 this.setState({ data: res.data });
-                console.log(this.state.data);
             }).catch(err => console.error(err))
     }
     render() {
@@ -83,7 +80,7 @@ class OwnadView extends React.Component {
                                 <p style={{ fontWeight: 'bold', lineHeight: '0px' }}><i className="fas fa-user-tie" style={{ color: '#777', fontSize: '30px' }}></i> &nbsp;&nbsp;{data !== undefined ? data[0].name : ''}</p>
                                 <p style={{ textAlign: 'center', fontSize: '18px' }}><i className="fas fa-phone"></i> {data !== undefined ? data[0].phone : ''}</p>
                             </div>
-              
+
                             <div id="tips">
                                 <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Safety Tips for Buyers</p>
                                 <ol type="1">

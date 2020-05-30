@@ -17,7 +17,6 @@ class List extends React.Component {
     componentDidMount() {
         let path = this.props.match.params.category;
         let path2 = this.props.match.params.city;
-        console.log(this.props.match.params.category);
         if (path) {
             axios.get('http://localhost:5000/item/?category=' + path)
                 .then((res) => {

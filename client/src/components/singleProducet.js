@@ -33,7 +33,6 @@ class SingleProduct extends React.Component {
         axios.get('http://localhost:5000/item/item/?id=' + path)
             .then((res) => {
                 this.setState({ data: res.data });
-                console.log(this.state.data);
             }).catch(err => console.error(err))
     }
     // ViewLater ads function

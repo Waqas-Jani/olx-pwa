@@ -13,21 +13,16 @@ class Messages extends React.Component {
     }
 
     componentDidMount() {
-
         axios.get('http://localhost:5000/item/showMessage?postID=' + this.props.postID)
             .then((response) => {
-                console.log('message response', response.data)
                 this.setState({ messageData: response.data })
             })
             .catch((err) => {
-                console.log(err)
             })
     }
     deleteMessage = (id) => {
-
         axios.delete('http://localhost:5000/item/deleteMessage/' + id)
             .then((response) => {
-
                 var newList = this.state.messageData.filter(function (data) {
                     return data._id != id
                 })

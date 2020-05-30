@@ -62,23 +62,16 @@ class Register extends React.Component {
     getRegister = (e) => {
         e.preventDefault();
         axios.post('http://localhost:5000/user/register', this.state).then(res => {
-
-            console.log(res.data);
-
             this._addNotification("success", "You have successfully registered.");
             window.location = '/user/login';
 
         })
             .catch(err => {
-                console.log(err)
                 console.error(err.response);
                 var errors = err.response.data.errors === undefined ? [] : err.response.data.errors;
-
                 for (var i = 0; i < errors.length; i++) {
                     this._addNotification("error", `${i + 1} -> ${errors[i].param}: ${errors[i].msg}`)
                 }
-
-
             });
 
     }
@@ -127,21 +120,14 @@ class Register extends React.Component {
                                         validations={[required, isEqual]}
                                         id="repeatpassword" placeholder="Confirm Password" />
                                 </div>
-
-
                                 <button type="submit" className="btn btn-outline-primary btn-block" >Create</button>
-
-
                             </Form>
-
                         </div>
-
                     </div>
                 </div>
                 <NotificationSystem ref="notificationSystem" />
                 <Footer />
             </div>
-
         );
     }
 }

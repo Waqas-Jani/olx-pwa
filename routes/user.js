@@ -66,32 +66,20 @@ router.post('/register', function (req, res) {
                         NewUser.password = hash;
                         NewUser.save(function (err) {
                             if (err) {
-                                console.log(err);
                                 res.status(422);
-                                console.log(err);
                                 res.json(err);
                             } else {
                                 res.json({
                                     status: "OK"
                                 })
-
-
                             }
-
                         });
-
                     }
                 });
-
-
-
             }
-
             return;
         });
     }
-
-
 });
 
 
@@ -144,7 +132,6 @@ router.post('/login', function (req, res, next) {
             });
         })
         .catch(er => {
-            console.log(er);
             res.status(500).json({
                 er
             });
@@ -178,7 +165,6 @@ router.get('/ads/:userId', function (req, res) {
 // Register process form
 router.put('/update/:id', function (req, res) {
     const query = { _id: req.params.id };
-    console.log(query);
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
@@ -225,9 +211,7 @@ router.put('/update/:id', function (req, res) {
                         updateuser.password = hash;
                         User.updateOne(query, updateuser, function (err, result) {
                             if (err) {
-                                console.log(err);
                                 res.status(422);
-                                console.log(err);
                                 res.json(err);
                             } else {
                                 res.json({
@@ -266,23 +250,18 @@ router.delete('/delete/account/:id', function (req, res) {
     //All whishlist empty related to spcific user
 
     ViewLater.deleteMany({ _userId: req.params.id }).then(r => {
-        console.log("Delete userId");
     }).catch(err => console.log(err));
     //pely user ki sari ads fetch kro
     Ads.find({ _userId: req.params.id }, function (err, userpost) {
         if (err) {
             // res.status(500).json(err)
-            console.log(err);
         } else {
             // get post ids ka array and store into array
-            //console.log(userpost);
             var postid = [];
 
             for (var x in userpost) {
-                console.log(userpost[x]);
                 postid.push(userpost[x]._id);
             }
-            console.log(postid);
             // where in  delete viewlater 
             ViewLater.deleteMany({ _postId: { $in: postid } }).then().catch(err => res.status(500).json({
                 err
@@ -291,7 +270,6 @@ router.delete('/delete/account/:id', function (req, res) {
             Ads.deleteMany({ _userId: req.params.id }).then(suc => {
 
             }).catch(err => {
-                console.log(err);
                 res.status(500).json({
                     err
                 })
@@ -304,18 +282,15 @@ router.delete('/delete/account/:id', function (req, res) {
 
     })
 
-
     // Then user account remove 
     User.deleteOne({ _id: req.params.id })
         .exec()
         .then(result => {
-            // console.log(result);
             res.status(200).json({
                 msg: "User Deleted Successfully"
             });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
                 err
             })
@@ -343,9 +318,7 @@ router.post('/viewlater', function (req, res) {
             view._userId = userId;
             view.save(function (err, result) {
                 if (err) {
-                    console.log(err);
                     res.status(422);
-                    console.log(err);
                     res.json(err);
                 } else {
                     res.json({
@@ -372,7 +345,6 @@ router.get('/ads/viewlater/:id', function (req, res) {
         for (var x in post) {
             arr.push(post[x]._postId);
         }
-        //  console.log(arr);
         Ads.find({ _id: { $in: arr } }, function (err, result) {
             if (err) {
                 res.status(500).json(err)
@@ -385,17 +357,12 @@ router.get('/ads/viewlater/:id', function (req, res) {
 
 // Remove from WhishList 
 router.delete('/whishlist/delete/:postId/:userId', function (req, res) {
-    console.log(req.params.postId);
-    console.log(req.params.userId);
-  
     ViewLater.deleteOne({ _postId: req.params.postId, _userId: req.params.userId }).then(suc => {
-        console.log("Suucess");
         res.status(200).json({
             msg: "Remove From List"
         })
 
     }).catch(err => {
-        console.log(err);
         res.status(500).json({
             err
         });

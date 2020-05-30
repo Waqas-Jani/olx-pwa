@@ -40,19 +40,14 @@ class Login extends React.Component {
     getLogIn = (e) => {
         e.preventDefault();
         axios.post('http://localhost:5000/user/login', this.state).then(res => {
-            // console.log(res.data);
-
             this._addNotification("success", "You have successfully LogIn.");
             if (res.status === 200) {
-                //console.log(res.data);
                 localStorage.setItem("UserObject", JSON.stringify(res.data));
                 window.location = '/myaccount';
 
             }
         })
             .catch(err => {
-                console.log(err)
-                console.log(err.response.data.msg);
                 if (err.response.status === 401) {
                     this._addNotification("error", `${err.response.data.msg}`);
                 }

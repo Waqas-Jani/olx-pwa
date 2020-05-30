@@ -63,14 +63,12 @@ class UpdateProfile extends React.Component {
         e.preventDefault();
         let id = _userdata._id;
         axios.put('http://localhost:5000/user/update/' + id, this.state).then(res => {
-            console.log(res.data);
             this._addNotification("success", "You have successfully Updated.");
             // localStorage.setItem("UserObject", JSON.stringify(res.data));
             localStorage.removeItem('UserObject');
             window.location = '/user/login'
         })
             .catch(err => {
-                console.log(err)
                 console.error(err.response);
                 var errors = err.response.data.errors === undefined ? [] : err.response.data.errors;
 

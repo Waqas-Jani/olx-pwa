@@ -20,7 +20,6 @@ class Home extends React.Component {
         axios.get('http://localhost:5000/item/total/ads')
             .then((res) => {
                 this.setState({ totalAds: res.data });
-                console.log(this.state.totalAds);
             }).catch(err => console.error(err))
 
         // Set the state and get value from input field 
@@ -36,7 +35,6 @@ class Home extends React.Component {
             //const upper = place.replace(/^\w/g, c => c.toUpperCase());
             const upper = this.capital(place);
             window.location = '/cities/' + upper;
-            console.log(upper);
 
         });
     }
@@ -88,7 +86,7 @@ class Home extends React.Component {
 
                                     })
                                 }
-                           </div>
+                            </div>
                         </div>
                     </div>
                 </div>
